@@ -1,4 +1,5 @@
 import fetch from '@/utils/fetch'
+import { getNav } from '@/utils/auth'
 
 export function loginByUsername(username, password) {
   const data = {
@@ -24,6 +25,17 @@ export function getUserInfo(token) {
     url: '/user/info',
     method: 'get',
     params: { token }
+  })
+}
+
+export function getPermission() {
+  var navStr = getNav();
+  if(navStr){
+    return JSON.parse(navStr);
+  }
+  return fetch({
+    url: '/user/permission',
+    method: 'get'
   })
 }
 

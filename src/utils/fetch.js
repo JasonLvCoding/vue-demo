@@ -12,8 +12,10 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(config => {
   // Do something before request is sent
-  if (store.getters.token) {
-    config.headers['X-Token'] = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
+  let token = store.getters.token && getToken();
+  if (token) {
+    config.headers['X-Token'] = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改config.params){
+    config.params?(config.params.token = token):(config.params = { token }); //remove config.params.token when api finished
   }
   return config
 }, error => {

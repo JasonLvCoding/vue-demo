@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { isvalidUsername, validator } from '@/utils/validate'
+import { isvalidUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   components: {},

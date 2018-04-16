@@ -1,14 +1,14 @@
 <template>
   <div class="form-control">
     路由信息：{{$route.name}}
-    <button @click.native="test" >模态窗口测试</button>
+    <button @click.prevent="showConfirm" >模态窗口测试</button>
   </div>
 </template>
 
 <script>
 //import { isvalidUsername } from '@/utils/validate'
 export default {
-  name: 'Index',
+  name: 'Manager',
   components: {},
   data () {
     return {
@@ -16,10 +16,14 @@ export default {
     }
   },
   mouted(){
-    this.getUserInfo();
-    console.log(this.$route.name);
+    //this.getUserInfo();
+    
   },
   methods: {
+    showConfirm(){
+      
+      this.$bus.$emit('dialogconfirm', { title: '模块标题测试' , msg: '这是个模块窗口测试！'});
+    },
     getUserInfo() {
       this.loading = true;
       this.$store.dispatch('GetUserInfo', this.loginForm).then(() => {

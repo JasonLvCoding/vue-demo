@@ -24,6 +24,12 @@ const userMap = {
   }
 }
 
+const navList = {
+  admin: {
+      data: ['user', 'manager', 'account']
+  }
+};
+
 export default {
   loginByUsername: config => {
     const { username } = JSON.parse(config.body)
@@ -33,6 +39,14 @@ export default {
     const { token } = param2Obj(config.url)
     if (userMap[token]) {
       return userMap[token]
+    } else {
+      return Promise.reject('error')
+    }
+  },
+  getPermission: config => {
+    const { token } = param2Obj(config.url)
+    if (navList[token] && navList[token].data) {
+      return navList[token].data
     } else {
       return Promise.reject('error')
     }

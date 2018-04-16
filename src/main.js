@@ -6,7 +6,10 @@ import router from './router'
 import * as filters from './filters' // 全局filter
 import 'babel-polyfill'
 import store from './store'
+import Bus from 'vue-bus'
 import './mock'
+
+Vue.use(Bus)
 
 Vue.config.productionTip = false
 

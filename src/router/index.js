@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
+
+
 
 const _import = require('./_import_' + process.env.NODE_ENV)
 // in development env not use Lazy Loading,because Lazy Loading too many pages will cause webpack hot update too slow.so only in production use Lazy Loading
@@ -12,19 +15,60 @@ Vue.use(Router)
 
 
 export const constantRouterMap = [
-	{ path: '/login', component: _import('Login'), hidden: true },
-	{
-		path: '/',
-		name: 'Index',
-		component: _import('Index')
-	}/*,
+	{ path: '/login', name:'login', component: _import('Login'), hidden: true },
+	{ 
+		path: '/', 
+		component: _import('Index'), 
+		name: 'index',
+		meta: {
+			auth: true
+		},
+		hidden: true 
+	}
+	/*,
 
 	{ path: '/authredirect', component: _import('login/authredirect'), hidden: true },
-	{ path: '/404', component: _import('errorPage/404'), hidden: true },
+
 	{ path: '/401', component: _import('errorPage/401'), hidden: true }*/
 ]
 
-export const asyncRouterMap = [];
+export const asyncRouterMap = [{
+	path: '/user',
+	name: 'user',
+	components: {
+		default: _import('Manager'),
+		confirm: _import('common/Confirm'),
+		dialog: _import('common/Dialog')
+	},
+	meta: {
+		auth: true
+	}
+}, {
+	path: '/manager',
+	name: 'manager',
+	components: {
+		default: _import('Manager'),
+		confirm: _import('common/Confirm'),
+		dialog: _import('common/Dialog')
+	},
+	meta: {
+		auth: true
+	}
+}, {
+	path: '/account',
+	name: 'account',
+	components: {
+		default: _import('Manager'),
+		confirm: _import('common/Confirm'),
+		dialog: _import('common/Dialog')
+	},
+	meta: {
+		auth: true
+	}
+}, { path: '*', redirect: '/404', name: '404', hidden: true }];
+
+
+
 
 var router = new Router({
 	// mode: 'history', //后端支持可开
@@ -34,7 +78,21 @@ var router = new Router({
 
 
 router.beforeEach((to, from, next)=>{
-	next(true);
+	if(to.name == 'login'){
+		next(true);
+	}
+	if(to.meta && to.meta.auth && !store.state.user.token ){
+		next({path: '/login', replace: true, query: { redirect: to.fullPath }});
+		return;
+	}
+	if(store.state.permission.routeLoaded){
+		next(true);
+		return;
+	}
+	store.dispatch('GenerateRoutes').then((addRouters) => {
+		router.addRoutes(addRouters) // 动态添加可访问路由表
+        next({ ...to, replace: true }) 	
+	});
 });
 
 export default router;
