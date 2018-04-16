@@ -36,9 +36,7 @@ export const asyncRouterMap = [{
 	path: '/user',
 	name: 'user',
 	components: {
-		default: _import('Manager'),
-		confirm: _import('common/Confirm'),
-		dialog: _import('common/Dialog')
+		default: _import('Manager')
 	},
 	meta: {
 		auth: true
@@ -47,9 +45,7 @@ export const asyncRouterMap = [{
 	path: '/manager',
 	name: 'manager',
 	components: {
-		default: _import('Manager'),
-		confirm: _import('common/Confirm'),
-		dialog: _import('common/Dialog')
+		default: _import('Manager')
 	},
 	meta: {
 		auth: true
@@ -58,9 +54,7 @@ export const asyncRouterMap = [{
 	path: '/account',
 	name: 'account',
 	components: {
-		default: _import('Manager'),
-		confirm: _import('common/Confirm'),
-		dialog: _import('common/Dialog')
+		default: _import('Manager')
 	},
 	meta: {
 		auth: true
@@ -68,6 +62,13 @@ export const asyncRouterMap = [{
 }, { path: '*', redirect: '/404', name: '404', hidden: true }];
 
 
+console.log(asyncRouterMap);
+asyncRouterMap.forEach((item)=>{
+	if(item.meta && item.meta.auth){
+		item.components.confirm = _import('common/Confirm');
+		item.components.dialog = _import('common/Dialog');
+	}
+});
 
 
 var router = new Router({
