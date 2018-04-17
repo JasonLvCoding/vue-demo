@@ -1,6 +1,7 @@
 <template>
   <div class="form-control">
     路由信息：{{$route.name}}
+    国际化标题信息：{{$t('message.title')}}
     <button @click.prevent="showConfirm" >模态窗口测试</button>
   </div>
 </template>

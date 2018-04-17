@@ -67,6 +67,7 @@ asyncRouterMap.forEach((item)=>{
 	if(item.meta && item.meta.auth){
 		item.components.confirm = _import('common/Confirm');
 		item.components.dialog = _import('common/Dialog');
+		item.components.header = _import('common/Header');
 	}
 });
 

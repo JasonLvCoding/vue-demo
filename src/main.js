@@ -7,9 +7,11 @@ import * as filters from './filters' // 全局filter
 import 'babel-polyfill'
 import store from './store'
 import Bus from 'vue-bus'
+import VueI18N from 'vue-i18n'
 import './mock'
 
 Vue.use(Bus)
+Vue.use(VueI18N)
 
 Vue.config.productionTip = false
 
@@ -17,11 +19,20 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+const i18n = new VueI18N({
+    locale: 'zh',  // 语言标识
+    messages: {
+        'zh': require('./lang/zh'),
+        'en': require('./lang/en')
+    }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: { App },
   template: '<App/>'
 })
