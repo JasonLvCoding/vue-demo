@@ -1,5 +1,6 @@
 <template>
-  <div class="form-control">
+  <div >
+    <slider/>
     路由信息：{{$route.name}}
     国际化标题信息：{{$t('message.title')}}
     <button @click.prevent="showConfirm" >模态窗口测试</button>
@@ -8,10 +9,10 @@
 </template>
 
 <script>
-//import { isvalidUsername } from '@/utils/validate'
+import slider from '@/components/common/SliderBar.vue'
 export default {
   name: 'Manager',
-  components: {},
+  components: {slider},
   data () {
     return {
       loading: false

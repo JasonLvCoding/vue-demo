@@ -1,4 +1,7 @@
 module.exports = {
+    system: {
+        name: '服务管理系统'
+    },
     message: {
         title: '运动品牌'
     },

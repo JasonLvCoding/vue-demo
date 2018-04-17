@@ -15,14 +15,18 @@ Vue.use(Router)
 
 
 export const constantRouterMap = [
-	{ path: '/login', name:'login', component: _import('Login'), hidden: true },
 	{ 
+		path: '/login', 
+		name:'login',
+		component: _import('Login'), 
+		hidden: true 
+	}, { 
 		path: '/', 
-		component: _import('Index'), 
-		name: 'index',
-		meta: {
-			auth: true
-		},
+		name:'home',
+		components: {
+			default: _import('Index'),
+			header: _import('common/Header')
+		}, 
 		hidden: true 
 	}
 	/*,
@@ -32,7 +36,17 @@ export const constantRouterMap = [
 	{ path: '/401', component: _import('errorPage/401'), hidden: true }*/
 ]
 
-export const asyncRouterMap = [{
+export const asyncRouterMap = [{ 
+		path: '/', 
+		name: 'index',
+		components: {
+			default: _import('Index')
+		},
+		meta: {
+			auth: true
+		},
+		hidden: true 
+	}, {
 	path: '/user',
 	name: 'user',
 	components: {
@@ -45,7 +59,8 @@ export const asyncRouterMap = [{
 	path: '/manager',
 	name: 'manager',
 	components: {
-		default: _import('Manager')
+		default: _import('Manager'),
+		slider: _import('common/SliderBar')
 	},
 	meta: {
 		auth: true
@@ -62,7 +77,7 @@ export const asyncRouterMap = [{
 }, { path: '*', redirect: '/404', name: '404', hidden: true }];
 
 
-console.log(asyncRouterMap);
+
 asyncRouterMap.forEach((item)=>{
 	if(item.meta && item.meta.auth){
 		item.components.confirm = _import('common/Confirm');
