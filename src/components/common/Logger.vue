@@ -8,7 +8,7 @@
 				<div>url: {{ log.row.url }}</div>
 			</div>
 			<div>
-				{{ scope.row.err.stack }}
+				{{ log.row.err.stack }}
 			</div>
 		</div>
 	</div>

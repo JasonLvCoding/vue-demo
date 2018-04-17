@@ -67,7 +67,11 @@ asyncRouterMap.forEach((item)=>{
 	if(item.meta && item.meta.auth){
 		item.components.confirm = _import('common/Confirm');
 		item.components.dialog = _import('common/Dialog');
+<<<<<<< Updated upstream
 		item.components.header = _import('common/Header');
+=======
+		item.components.navbar = _import('common/Nav');
+>>>>>>> Stashed changes
 	}
 });
 

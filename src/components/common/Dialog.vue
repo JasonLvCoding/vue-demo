@@ -1,5 +1,5 @@
 <template>
-	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+	<div class="modal fade" id="dialogModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -11,7 +11,7 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					{{msg}}
+					<component :is="contentView"></component>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -27,26 +27,27 @@
 
 <script>
 export default {
-  name: 'Confirm',
+  name: 'Dialog',
   components: {},
   data () {
     return {
       title: '提示',
-      msg: '提示文本'
+      msg: '提示文本',
+      contentView: null
     }
   },
   mounted(){
-    this.$bus.$on('dialog', this.show);
+    this.$bus.$on('dialogshow', this.show);
   },
   destroy(){
-  	this.$bus.$off('dialog', this.show);
+  	this.$bus.$off('dialogshow', this.show);
   },
   methods: {
     show(data){
     	let modalStr = data && data.hide ? 'hide' : null;
     	this.msg = data && data.msg || this.msg;
     	this.title = data && data.title || this.title;
-    	$('#confirmModal').modal(modalStr);
+    	$('#dialogModal').modal(modalStr);
     }
   }
 }
