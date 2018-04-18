@@ -1,7 +1,9 @@
-<template>
-  <div class="form-control">
-    路由信息：{{$route.name}}
-    <button @click.native="test" >模态窗口测试</button>
+<template lang="html">
+  <div>
+    <div style="margin: 20px 0">
+      <p>欢迎，{{loading}}</p>
+      <p></p>
+    </div>
   </div>
 </template>
 
@@ -16,8 +18,7 @@ export default {
     }
   },
   mouted(){
-    this.getUserInfo();
-    console.log(this.$route.name);
+    //this.getUserInfo();
   },
   methods: {
     getUserInfo() {
@@ -36,20 +37,5 @@ export default {
 
 
 <style>
-  .form-control input{
-    width: 150px;
-    height: 24px;
-    line-height: 24px;
-    box-sizing: border-box;
-    padding: 5px 10px;
-    margin-bottom: 5px;
-  }
-
-  .form-control button {
-    padding: 5px 10px;
-    background-color: #28A7E3;
-    color: #000;
-    margin: 0;
-    border: none;
-  }
+  
 </style>

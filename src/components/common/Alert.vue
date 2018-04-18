@@ -34,7 +34,7 @@ export default {
       
     }
   },
-  mouted(){
+  mounted(){
     
   },
   methods: {

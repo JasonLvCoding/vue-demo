@@ -33,6 +33,6 @@ new Vue({
   router,
   store,
   i18n,
-  components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  components: { App }
 })

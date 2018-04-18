@@ -1,27 +1,24 @@
 <template>
   <div id="app">
-    <router-view name="header"/>
-    <router-view name="confirm"/>
-    <router-view name="dialog"/>
-    <div class="content-wrapper" style="min-height: 100vh;">
+    <router-view name="header"></router-view>  
+    <router-view name="navbar"></router-view>  
+    <router-view name="aside" ></router-view>  
+    <router-view name="confirm"></router-view>  
+    <router-view name="dialog" ></router-view>  
+    <div class="content-wrapper">
       <section class="content-header">
-        <div class="tabs">
-          <ul>
-            <li>测试1&nbsp;</li>
-            <li>测试2&nbsp;</li>
-            <li>测试3&nbsp;</li>
-          </ul>
-        </div>
+        
       </section>
-      <router-view /> 
-    </div>
-    
+      <section class="content">
+        <router-view ></router-view>
+      </section>
+    </div> 
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
 }
 </script>
 

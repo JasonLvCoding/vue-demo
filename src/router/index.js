@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 
-
-
 const _import = require('./_import_' + process.env.NODE_ENV)
 // in development env not use Lazy Loading,because Lazy Loading too many pages will cause webpack hot update too slow.so only in production use Lazy Loading
 
@@ -25,9 +23,15 @@ export const constantRouterMap = [
 		name:'home',
 		components: {
 			default: _import('Index'),
-			header: _import('common/Header')
+			header: _import('common/Header'),
+			navbar: _import('common/NavBar'),
+			aside: _import('common/Aside')
 		}, 
-		hidden: true 
+		hidden: true ,
+		meta: {
+			auth: true
+		}
+
 	}
 	/*,
 
@@ -59,8 +63,7 @@ export const asyncRouterMap = [{
 	path: '/manager',
 	name: 'manager',
 	components: {
-		default: _import('Manager'),
-		slider: _import('common/SliderBar')
+		default: _import('Manager')
 	},
 	meta: {
 		auth: true
@@ -83,7 +86,8 @@ asyncRouterMap.forEach((item)=>{
 		item.components.confirm = _import('common/Confirm');
 		item.components.dialog = _import('common/Dialog');
 		item.components.header = _import('common/Header');
-		item.components.navbar = _import('common/Nav');
+		item.components.navbar = _import('common/NavBar');
+		item.components.aside = _import('common/Aside');
 	}
 });
 

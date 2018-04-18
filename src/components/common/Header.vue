@@ -1,19 +1,18 @@
 <template>
 <header class="main-header">
-    <a href="#/" class="logo">
-      <span class="logo-mini">S</span>
-      <span class="logo-lg">{{$t('system.name')}}</span>
+    <a href="javascript:void(0)" class="logo">
+      <span class="logo-mini"><b>S</b>A</span>
+      <span class="logo-lg"><b>{{$t('system.name')}}</b></span>
     </a>
     <nav class="navbar navbar-static-top">
-      <a href="#/" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">切换导航</span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
             </a>
@@ -22,7 +21,7 @@
               <li>
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <div class="pull-left">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
@@ -248,7 +247,7 @@
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
-      </div>
+      </div> 
     </nav>
 </header>
 </template>
@@ -264,7 +263,7 @@ export default {
       i18nList
     }
   },
-  mouted(){
+  mounted(){
     
     
   },
