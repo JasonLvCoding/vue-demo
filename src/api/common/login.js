@@ -31,7 +31,11 @@ export function getUserInfo(token) {
 export function getPermission() {
   var navStr = getNav();
   if(navStr){
-    return JSON.parse(navStr);
+    return new Promise((resolve)=>{
+      resolve({data: JSON.parse(navStr)})
+    }).catch((error)=>{
+      Promise.reject(error);
+    });
   }
   return fetch({
     url: '/user/permission',

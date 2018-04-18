@@ -16,11 +16,11 @@ export function removeToken() {
 }
 
 export function getNav() {
-	return Cookies.get(NAV_LIST)
+	return sessionStorage.getItem(NAV_LIST)
 }
 
 export function setNav(navList) {
-	return Cookies.get(NAV_LIST, navList)
+	return sessionStorage.setItem(NAV_LIST, navList)
 }
 
 

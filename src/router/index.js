@@ -40,44 +40,61 @@ export const constantRouterMap = [
 	{ path: '/401', component: _import('errorPage/401'), hidden: true }*/
 ]
 
-export const asyncRouterMap = [{ 
-		path: '/', 
-		name: 'index',
+export const asyncRouterMap = [{
+		path: '/case',
+		name: 'case',
 		components: {
-			default: _import('Index')
+			default: _import('Manager')
 		},
 		meta: {
 			auth: true
-		},
-		hidden: true 
+		}
 	}, {
-	path: '/user',
-	name: 'user',
-	components: {
-		default: _import('Manager')
-	},
-	meta: {
-		auth: true
-	}
-}, {
-	path: '/manager',
-	name: 'manager',
-	components: {
-		default: _import('Manager')
-	},
-	meta: {
-		auth: true
-	}
-}, {
-	path: '/account',
-	name: 'account',
-	components: {
-		default: _import('Manager')
-	},
-	meta: {
-		auth: true
-	}
-}, { path: '*', redirect: '/404', name: '404', hidden: true }];
+		path: '/asset',
+		name: 'asset',
+		components: {
+			default: _import('Manager')
+		},
+		meta: {
+			auth: true
+		}
+	}, {
+		path: '/crm',
+		name: 'crm',
+		components: {
+			default: _import('Manager')
+		},
+		meta: {
+			auth: true
+		}
+	}, {
+		path: '/partner',
+		name: 'partner',
+		components: {
+			default: _import('Manager')
+		},
+		meta: {
+			auth: true
+		}
+	}, {
+		path: '/knowledge',
+		name: 'knowledge',
+		components: {
+			default: _import('Manager')
+		},
+		meta: {
+			auth: true
+		}
+	}, {
+		path: '/rent',
+		name: 'rent',
+		components: {
+			default: _import('Manager')
+		},
+		meta: {
+			auth: true
+		}
+	}, { path: '*', redirect: '/404', name: '404', hidden: true }];
 
 
 

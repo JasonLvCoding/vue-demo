@@ -13,7 +13,7 @@ function hasPermission(roles, route) {
     return true
   }*/
   if(!roles || roles.length == 0) return false;
-  return roles.find(role => role == route.name) != null;
+  return roles.find(role => role.alias == route.name) != null;
 }
 
 /**
@@ -37,6 +37,7 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 const permission = {
   state: {
     routers: constantRouterMap,
+    menus: [], 
     routeLoaded: false,
     addRouters: []
   },
@@ -46,21 +47,19 @@ const permission = {
       state.routers = constantRouterMap.concat(routers)
       state.routeLoaded = true
 
+    },
+    SET_MENUS: (state, menus) => {
+      //缓存到sessionStorage
+      setNav(JSON.stringify(menus))
+      state.menus = menus
     }
   },
   actions: {
     GenerateRoutes({ commit }) {
       return new Promise(resolve => {
-        getPermission().then(({data})=>{
-          /*if (roles.indexOf('admin') >= 0) {
-            accessedRouters = asyncRouterMap
-          } else {
-
-            
-          }*/
-
+        getPermission().then(({ data }) => {
           let accessedRouters = filterAsyncRouter(asyncRouterMap, data)
-          setNav(JSON.stringify(data));
+          commit('SET_MENUS', data)
           commit('SET_ROUTERS', accessedRouters)
           resolve(accessedRouters)
         });

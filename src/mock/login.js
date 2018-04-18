@@ -26,7 +26,14 @@ const userMap = {
 
 const navList = {
   admin: {
-      data: ['user', 'manager', 'account']
+      data: [
+        {name: '工单', alias: 'case', path: '/case'}, 
+        {name: '资产', alias: 'asset', path: '/asset'},
+        {name: 'CRM', alias: 'crm', path: '/crm'},
+        {name: '合作商', alias: 'partner', path: '/partner'},
+        {name: '知识库', alias: 'knowledge', path: '/knowledge'},
+        {name: '租赁', alias: 'rent', path: '/rent'}
+      ]
   }
 };
 

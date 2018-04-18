@@ -1,39 +1,59 @@
 <template>
 <header class="main-header secondary">
-    <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown user user-menu" v-for="nav in navList">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../../assets/logo.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{nav}}</span>
-            </a>
-          </li>
-       </ul>
+  <div class="row">
+    <div class="col-sm-7">
+      <nav class="navbar navbar-static-top">
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu" >
+              <router-link :to="{ path: '/' }" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="../../assets/logo.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs">主页</span>
+              </router-link>
+            </li>
+            <li class="dropdown user user-menu" v-for="menu in menus">
+              <router-link :to="{ path: menu.path }" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="../../assets/logo.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs">{{menu.name}}</span>
+              </router-link>
+              
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="col-sm-5">
+      <div class="input-group">
+          <input type="text" name="query" class="form-control" placeholder="搜索系统">
+          <span class="input-group-btn">
+            <button type="submit" name="search"  class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
       </div>
-    </ul >
-  </nav>
+
+    </div>
+  </div>
+    
+    
 </header>
 </template>
 
 <script>
-import i18nList from '@/lang'
 export default {
   name: 'Manager',
   components: {},
   data () {
     return {
-      navList: []
+      
+    }
+  },
+  computed: {
+    menus(){
+      return this.$store.getters.menus;
     }
   },
   mounted(){
-    this.navList.push('主页');
-    this.navList.push('工单');
-    this.navList.push('资产');
-    this.navList.push('CRM');
-    this.navList.push('合作商');
-    this.navList.push('知识库');
-    this.navList.push('租赁');
+    
   },
   methods: {
     showConfirm(){ 
@@ -51,6 +71,7 @@ export default {
 }
 .main-header.secondary {
   z-index: 900;
+  position: relative;
 }
 .main-header.secondary .navbar{
   margin-left: 0;
@@ -60,5 +81,8 @@ export default {
 .main-header.secondary .navbar-custom-menu{
   float: none;
 }
-
+.main-header.secondary .input-group {
+  margin: 5px auto;
+  padding: 0px 1px;
+}
 </style>
