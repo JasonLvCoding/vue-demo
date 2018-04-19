@@ -8,17 +8,17 @@
     </section>
     <section class="content tab-content">
       <div class="tab-item" v-for="(tab, index) in models" v-show="index == activeIndex" >
-        <component :is="tab.alias" keep-alive></component>
+        <async-load-component :path="tab.path" :prop="tab.prop" keep-alive></async-load-component>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-
+import asyncLoadComponent from '@/components/common/AsyncLoadComponent.vue'
 export default {
   name: 'Tabs',
-  components: {},
+  components: { asyncLoadComponent },
   props: {
     models: {
       type: Array,
@@ -29,25 +29,17 @@ export default {
   },
   data () {
     return {
-      activeIndex: 0,
-      comps: [],
-      apps: []
+      activeIndex: 0
     }
   },
   computed: {
     
   },
   created(){
-    /*this.comps = new Set(this.models.map(({alias, path})=>{
-      return {alias, path};
-    }));
-    this.comps.forEach(({alias, path}) => {
-      this.apps.push({[alias]: require(`@/components/${path}.vue`)});
-    });*/
+
   },
   mounted(){
-    $('#loadingModal').show();
-    console.log(this.components);
+
   },
   methods: {
     add(tab){

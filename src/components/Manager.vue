@@ -14,20 +14,23 @@ export default {
     return {
       models: [{
         name:'创建服务单', 
-        alias: 'caseCreate',
+        alias: 'casecreate',
         path:'case/CaseCreate'
       }, {
         name:'查看服务单', 
-        alias: 'caseInfo',
-        path:'case/CaseInfo'
+        alias: 'caseinfo',
+        path:'case/CaseInfo',
+        prop: {id: '1'}
       }, {
         name:'查看服务单2', 
-        alias: 'caseInfo',
-        path:'case/CaseInfo'
+        alias: 'caseinfo',
+        path:'case/CaseInfo',
+        prop: {id: '2'}
       }, {
         name:'查看服务单3', 
-        alias: 'caseInfo',
-        path:'case/CaseInfo'
+        alias: 'caseinfo',
+        path:'case/CaseInfo',
+        prop: {id: '3'}
       }]
     }
   },

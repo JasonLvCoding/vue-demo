@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'CaseCreate',
+  name: 'casecreate',
   components: {},
   data () {
     return {

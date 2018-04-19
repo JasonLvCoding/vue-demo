@@ -1,13 +1,16 @@
 <template lang="html">
   <div>
-    查看工单信息
+    查看工单信息:{{prop.id}}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Index',
+  name: 'caseinfo',
   components: {},
+  props: {
+    prop: Object
+  },
   data () {
     return {
       
