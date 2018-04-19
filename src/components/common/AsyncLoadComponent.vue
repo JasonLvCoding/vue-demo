@@ -5,9 +5,7 @@
     console.log(this.prop);
       let myComponent = Vue.extend(require(`@/components/${this.path}.vue`).default);
       return h(myComponent, {
-        props: {
-          prop: this.prop
-        }
+        props: this.prop
       })
     },
     props: {
