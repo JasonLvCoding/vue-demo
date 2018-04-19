@@ -5,6 +5,20 @@
     <title>SaaS</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+      <!--iOS中隐藏Safari浏览器的UI:Start-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--iOS中隐藏Safari浏览器的UI:End-->
+    <!--iOS Safari对页面数字禁用拨号功能:Start-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <!--iOS Safari对页面数字禁用拨号功能:End-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="Cache-Control" content="no-transform, no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./static/fontAwesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="./static/adminLTE/css/AdminLTE.min.css">
@@ -23,9 +37,10 @@
         <div class="progress progress-striped active" style="margin-bottom: 0;">
           <div class="progress-bar" style="width: 100%;"></div>
         </div>
-        <h5>正在加载...</h5>
+        <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
       </div>
     </div>
+
 
     <!-- jQuery 2.2.3 -->
     <script src="./static/jQuery/jquery-2.2.3.min.js"></script>

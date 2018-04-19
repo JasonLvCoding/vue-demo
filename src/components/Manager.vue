@@ -1,19 +1,34 @@
 <template>
   <div >
-    路由信息：{{$route.name}}
-    国际化标题信息：{{$t('message.title')}}
-    <button @click.prevent="showConfirm" >模态窗口测试</button>
-    <button @click.prevent="showDailog" >模态窗口测试</button>
+
+    <tabs :models="models"></tabs>
   </div>
 </template>
 
 <script>
+import tabs from './common/Tabs.vue'
 export default {
   name: 'Manager',
-  components: {},
+  components: { tabs},
   data () {
     return {
-      loading: false
+      models: [{
+        name:'创建服务单', 
+        alias: 'caseCreate',
+        path:'case/CaseCreate'
+      }, {
+        name:'查看服务单', 
+        alias: 'caseInfo',
+        path:'case/CaseInfo'
+      }, {
+        name:'查看服务单2', 
+        alias: 'caseInfo',
+        path:'case/CaseInfo'
+      }, {
+        name:'查看服务单3', 
+        alias: 'caseInfo',
+        path:'case/CaseInfo'
+      }]
     }
   },
   mouted(){
@@ -21,10 +36,7 @@ export default {
     
   },
   methods: {
-    showConfirm(){
-      
-      this.$bus.$emit('dialogconfirm', { title: '模块标题测试' , msg: '这是个模块窗口测试！'});
-    },
+    
     getUserInfo() {
       this.loading = true;
       this.$store.dispatch('GetUserInfo', this.loginForm).then(() => {

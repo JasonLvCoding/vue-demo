@@ -6,12 +6,8 @@
     <router-view name="confirm"></router-view>  
     <router-view name="dialog" ></router-view>  
     <div class="content-wrapper">
-      <section class="content-header">
-        
-      </section>
-      <section class="content">
-        <router-view ></router-view>
-      </section>
+      <router-view ></router-view>
+      
     </div> 
   </div>
 </template>
@@ -36,21 +32,5 @@ export default {
   text-align: left;
 }
 
-.content-header>.tabs{
-  width: 100%;
-}
 
-.content-header>.tabs ul:after {
-  clear: both;
-  content: '';
-  display: block;
-  visibility: hidden;
-  height: 0;
-  line-height: 0;
-}
-
-.content-header>.tabs ul li{
-  float: left;
-  list-style: none;
-}
 </style>

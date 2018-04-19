@@ -25,7 +25,9 @@ export const constantRouterMap = [
 			default: _import('Index'),
 			header: _import('common/Header'),
 			navbar: _import('common/NavBar'),
-			aside: _import('common/Aside')
+			aside: _import('common/Aside'),
+			dialog: _import('common/Dialog'),
+			confirm: _import('common/Confirm')
 		}, 
 		hidden: true ,
 		meta: {

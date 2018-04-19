@@ -1,14 +1,15 @@
 <template lang="html">
   <div>
     <div style="margin: 20px 0">
-      <p>欢迎，{{loading}}</p>
-      <p></p>
+          路由信息：{{$route.name}}
+          国际化标题信息：{{$t('message.title')}}
+          <button @click.prevent="showConfirm" >模态窗口测试</button>
+          <button @click.prevent="showDailog" >模态窗口测试</button>
     </div>
   </div>
 </template>
 
 <script>
-//import { isvalidUsername } from '@/utils/validate'
 export default {
   name: 'Index',
   components: {},
@@ -21,6 +22,9 @@ export default {
     //this.getUserInfo();
   },
   methods: {
+    showConfirm(){
+      this.$bus.$emit('dialogconfirm', { title: '模块标题测试' , msg: '这是个模块窗口测试！'});
+    },
     getUserInfo() {
       this.loading = true;
       this.$store.dispatch('GetUserInfo', this.loginForm).then(() => {
