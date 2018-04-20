@@ -1,7 +1,7 @@
 <template>
   <div >
 
-    <tabs :models="models"></tabs>
+    <tabs :models="models" ref="child"></tabs>
   </div>
 </template>
 
@@ -34,9 +34,14 @@ export default {
       }]
     }
   },
-  mouted(){
+  mounted(){
     //this.getUserInfo();
-    
+    this.$refs.child.add({
+        name:'查看服务单4', 
+        alias: 'caseinfo',
+        path:'case/CaseInfo',
+        prop: {id: '4'}
+    });
   },
   methods: {
     

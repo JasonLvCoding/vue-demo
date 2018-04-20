@@ -95,7 +95,7 @@ export default {
 }
 
 .tab-header ul li.active {
-  background-color: #28a7e3;
+  background-color: #fff;
   border-bottom-color: tranparent;
 }
 
@@ -104,7 +104,7 @@ export default {
 }
 
 .tab-content {
-  background-color: #28a7e3;
+  background-color: #fff;
   min-height: 100%;
 }
 
