@@ -1,7 +1,7 @@
 <template>
 <header class="main-header secondary">
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-md-7">
       <nav class="navbar navbar-static-top">
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
@@ -22,7 +22,7 @@
         </div>
       </nav>
     </div>
-    <div class="col-sm-5">
+    <div class="col-md-5">
       <div class="input-group">
           <input type="text" name="query" class="form-control" placeholder="搜索系统">
           <span class="input-group-btn">

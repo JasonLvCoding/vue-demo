@@ -1,7 +1,16 @@
+body{
+  
+}
 .relative {
 	position: relative;
 }
 
 .sidebar-menu .treeview-menu>li>a.router-link-active {
 	color: #fff;
+}
+
+.required {
+  color: Red;
+  padding-right: 5px;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
