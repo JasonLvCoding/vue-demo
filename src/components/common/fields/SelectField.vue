@@ -1,6 +1,6 @@
 <template>
   <div class="form-group has-warning">
-    <label class="control-label" :class="{'sr-only': labelhidden}"><i class="required" v-if="required">*</i>{{label}}：</label>
+    <label  :class="{'sr-only': labelhidden=='true'}"><i class="required" v-if="required!='false'">*</i>{{label}}：</label>
     <select  class="form-control" :class="scale"  @change="handleChange" :value="currentValue">
       <option value="">{{placeholder}}</option>
       <slot></slot>
@@ -18,16 +18,16 @@ export default {
       default: ''
     },
     labelhidden: {
-      default: false,
-      type: Boolean
+      default: 'false',
+      type: String
     },
     placeholder:{
       default: '请选择',
       type: String
     },
     required: {
-      default: false,
-      type: Boolean
+      default: 'false',
+      type: String
     },
     scale: {
       default: 'auto',

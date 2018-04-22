@@ -1,8 +1,8 @@
 <template>
   <div class="form-group has-warning">
-    <label class="control-label" :class="{'sr-only': labelhidden}"><i class="required" v-if="required">*</i>{{label}}：</label>
-    <input :type="type" class="form-control" v-if="!static" :placeholder="placeholder" @input="handleChange" :value="currentValue">
-    <p class="form-control-static" v-if="static" v-text="currentValue"></p>
+    <label  :class="{'sr-only': labelhidden == 'true'}"><i class="required" v-if="required!='false'">*</i>{{label}}：</label>
+    <input :type="type" class="form-control" v-if="static=='false'" :placeholder="placeholder" @input="handleChange" :value="currentValue">
+    <p class="form-control-static" v-if="static=='true'" v-text="currentValue"></p>
   </div>
 </template>
 <script type="text/javascript">
@@ -20,8 +20,8 @@ export default {
       default: ''
     },
     labelhidden: {
-      default: false,
-      type: Boolean
+      default: 'false',
+      type: String
     },
     placeholder:{
       default(){
@@ -30,16 +30,16 @@ export default {
       type: String
     },
     required: {
-      default: false,
-      type: Boolean
+      default: 'false',
+      type: String
     },
     scale: {
       default: 'auto',
       type: String
     },
     static:{
-      default: false,
-      type: Boolean
+      default: 'false',
+      type: String
     }
   },
   data () {
@@ -63,8 +63,8 @@ export default {
 </script>
 <style>
 
-  .control-label{
-    width: 90px;
+  .form-group label{
+    width: 85px;
   }
 
 </style>
