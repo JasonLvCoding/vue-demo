@@ -8,10 +8,18 @@ import 'babel-polyfill'
 import store from './store'
 import Bus from 'vue-bus'
 import VueI18N from 'vue-i18n'
+import VeeValidate from 'vee-validate'
+import messages from 'vee-validate/dist/locale/zh_CN'
 import './mock'
 
 Vue.use(Bus)
 Vue.use(VueI18N)
+Vue.use(VeeValidate, {
+  locale: 'cn',
+  dictionary: {
+    cn: { messages }
+  }
+})
 
 Vue.config.productionTip = false
 

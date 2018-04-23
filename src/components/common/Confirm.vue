@@ -43,10 +43,10 @@ export default {
   },
   methods: {
     show(data){
-    	let modalStr = data && data.hide ? 'hide' : null;
-    	this.msg = data && data.msg || this.msg;
-    	this.title = data && data.title || this.title;
-    	$('#confirmModal').modal(modalStr);
+      let modalStr = data&& data.hide ? 'hide' : null;
+      this.msg = data&& data.msg || this.msg;
+      this.title = data&& data.title || this.title;
+      $('#confirmModal').modal(modalStr);
     }
   }
 }

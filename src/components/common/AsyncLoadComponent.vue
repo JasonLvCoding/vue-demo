@@ -1,8 +1,7 @@
 <script>
   import Vue from 'vue'
   export default {
-    render (h, cxt) {
-    console.log(this.prop);
+    render (h) {
       let myComponent = Vue.extend(require(`@/components/${this.path}.vue`).default);
       return h(myComponent, {
         props: this.prop
@@ -13,7 +12,7 @@
       prop: {
         type: Object,
         default(){
-          return {};
+          return {}
         }
       }
     }

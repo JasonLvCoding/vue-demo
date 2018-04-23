@@ -32,14 +32,4 @@ export function validatAlphabets(str) {
 }
 
 
-export function validator(rules){
-  let promise = new Promise((resolve, reject)=>{
-    var errors = [];
-    rules.forEach(rule=>{
-      console.log(rule);
-    });
-    resolve();
-  }).catch(error=>{
-    reject(error);
-  });
-}
+

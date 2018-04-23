@@ -268,7 +268,7 @@ export default {
     
   },
   watch: {
-    i18n(newVal, oldVal){
+    i18n(newVal){
        this.$i18n.locale = newVal;
     }
   },

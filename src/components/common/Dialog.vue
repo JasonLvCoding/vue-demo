@@ -40,14 +40,14 @@ export default {
     this.$bus.$on('dialogshow', this.show);
   },
   destroy(){
-  	this.$bus.$off('dialogshow', this.show);
+    this.$bus.$off('dialogshow', this.show);
   },
   methods: {
     show(data){
-    	let modalStr = data && data.hide ? 'hide' : null;
-    	this.msg = data && data.msg || this.msg;
-    	this.title = data && data.title || this.title;
-    	$('#dialogModal').modal(modalStr);
+      let modalStr = data&& data.hide ? 'hide' : null;
+      this.msg = data&& data.msg || this.msg;
+      this.title = data&& data.title || this.title;
+      $('#confirmModal').modal(modalStr);
     }
   }
 }

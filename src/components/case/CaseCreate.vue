@@ -30,7 +30,7 @@
                   <option v-for="item in menus" slot=""  :value="item.name">{{item.name}}</option>
                 </i-select>
               </div>
-              <button type="submit" class="btn btn-primary center-block">&nbsp;查询&nbsp;</button>
+              <button type="submit" class="btn btn-primary center-block" @click="submit">&nbsp;查询&nbsp;</button>
 
               <div class="table-responsive">
                 <table class="table">
@@ -58,8 +58,12 @@
               </div>
               <p><strong>详细信息</strong></p>
               <div class="form-inline  clearfix row">
-                <i-input  class="col-md-6" label="人员"  v-model="formState.name" ></i-input>
-                <i-input  class="col-md-6" label="电话"  type="number" v-model="formState.tel"  ></i-input>
+                <i-input  class="col-md-6" label="人员" name="user" rules="required|email" v-model="formState.user" >
+                  
+                </i-input>
+                <i-input  class="col-md-6" label="电话"  name="tel" rules="required"  type="number" v-model="formState.tel"  >
+                  
+                </i-input>
               </div>
               <div class="form-inline  clearfix row">
                  <i-select  class="col-md-6"  v-model="formState.project" label="门店" scale="medium" >
@@ -79,10 +83,14 @@
                 </i-select>
               </div>
               <div class="row form-inline">
-                <i-input  class="col-md-12" label="地址"  v-model="formState.name" ></i-input>
+                <i-input  class="col-md-12" label="地址" name="address" rules="required|ip" v-model="formState.address" >
+                  
+                </i-input>
               </div>
               <div class="row form-inline">
-                <i-input  class="col-md-12" label="其它"  v-model="formState.name" ></i-input>
+                <i-input  class="col-md-12" label="其它" name="other" rules="required" v-model="formState.other" >
+                  
+                </i-input>
               </div>
             </div>
           </div>
@@ -105,6 +113,9 @@ export default {
     return {
       formState:{
         name: '',
+        user: '',
+        address: '',
+        other: '',
         tel: '',
         caseNumber: '201804201001',
         dailyCount: 0,
@@ -124,7 +135,10 @@ export default {
   },
   methods: {
     submit(){
-      console.info(this.formState.tel);
+      console.info(this.$validator, this.formState.user);
+      this.$validator.validateAll().then(result=>{
+        alert(result)
+      });
     }
   }
 }
@@ -137,7 +151,7 @@ export default {
   }
 
   .fieldset {
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   .box.box-solid.box-default .box-header{

@@ -9,9 +9,8 @@
     "\\src\\store",
     "\\static",
     "\\static\\bootstrap",
-    "\\static\\bootstrap\\css",
-    "\\static\\css"
+    "\\static\\bootstrap\\css"
   ],
-  "SelectedNode": "\\src\\App.vue",
+  "SelectedNode": "\\src\\components\\common\\fields\\InputField.vue",
   "PreviewInSolutionExplorer": false
 }

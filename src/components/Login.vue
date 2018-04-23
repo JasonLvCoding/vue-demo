@@ -52,7 +52,7 @@ export default {
         this.loading = false
       })
       return
-      this.formState.validate(valid => {
+      /*this.formState.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.formState).then(() => {
@@ -66,7 +66,7 @@ export default {
           console.log('error submit!!')
           return false
         }
-      })
+      })*/
     }
   }
 }
