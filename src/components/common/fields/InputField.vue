@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group has-warning">
+  <div class="form-group">
     <label  :class="{'sr-only': labelhidden == 'true'}"><i class="required" v-if="required!='false'">*</i>{{label}}：</label>
     <input :type="type" class="form-control" v-if="static=='false'" :placeholder="placeholder" @input="handleChange" :value="currentValue">
     <p class="form-control-static" v-if="static=='true'" v-text="currentValue"></p>

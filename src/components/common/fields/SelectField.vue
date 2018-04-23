@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group has-warning">
+  <div class="form-group">
     <label  :class="{'sr-only': labelhidden=='true'}"><i class="required" v-if="required!='false'">*</i>{{label}}：</label>
     <select  class="form-control" :class="scale"  @change="handleChange" :value="currentValue">
       <option value="">{{placeholder}}</option>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="container-fluid">
+  <div class="case-form">
     
     <p><i class="fa fa-wrench"></i><span>服务单号：{{formState.caseNumber}}</span></p>
     <div class="clearfix row   form-inline">
@@ -131,7 +131,7 @@ export default {
 </script>
 
 
-<style>
+<style >
   .fa {
     width: 20px;
   }
@@ -149,6 +149,16 @@ export default {
 
   .form-inline.row{
     margin-bottom: 20px;
+  }
+   @media screen and (max-width:1400px) and (min-width:768px){
+    .case-form .form-inline label{
+      width: 90px;
+    }
+
+    .case-form .form-inline .form-control{
+      width: calc(100% - 95px);
+    }
+
   }
 
 
