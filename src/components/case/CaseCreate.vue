@@ -97,7 +97,8 @@
           
       </div>
       <div class="col-md-6 col-sm-12">
-
+        <button @click.prevent="showPicker">选择时间</button>
+        <picker ref="picker"></picker>
       </div>
     </div>
   </div>
@@ -106,9 +107,10 @@
 <script type="text/javascript">
 import iSelect from '@/components/common/fields/SelectField.vue'
 import iInput from '@/components/common/fields/InputField.vue'
+import picker from '@/components/common/Picker.vue'
 export default {
   name: 'casecreate',
-  components: { iSelect, iInput },
+  components: { iSelect, iInput, picker },
   data () {
     return {
       formState:{
@@ -139,7 +141,10 @@ export default {
       this.$validator.validateAll().then(result=>{
         alert(result)
       });
-    }
+    },
+    showPicker(){
+      this.$refs.picker.show();
+    },
   }
 }
 </script>
