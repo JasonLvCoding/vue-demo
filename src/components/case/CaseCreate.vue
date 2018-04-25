@@ -98,7 +98,11 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <button @click.prevent="showPicker">选择时间</button>
-        <picker ref="picker"></picker>
+        <div>结果是:{{formState.values}}</div>
+        <div style="height: 200px;">
+          <picker ref="picker" v-model="formState.values" :valueProps="formState.valueProps"></picker>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -123,7 +127,9 @@ export default {
         dailyCount: 0,
         monthlyCount: 0,
         project: '租赁',
-        createDate: '2018-04-10'
+        createDate: '2018-04-10',
+        valueProps: ['province', 'city', 'dist'],
+        values: {}
       }
     }
   },

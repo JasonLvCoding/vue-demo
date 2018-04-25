@@ -23,9 +23,12 @@
             event: 'change'
         },
         props:{
+            depth: Number,
             data: {
                 type:Array,
-                default:[]
+                default(){
+                    return [];
+                }
              },
              displayField:{
                  type: String,
@@ -45,9 +48,14 @@
             },
             value: String
         },
-        mounted (){
-            console.log(this.value);
+        watch:{
+            value(newVal, oldVal){
+                this.selectItem(newVal);
+            }
+        },
+        created (){
             this.init();
+
             
         },
         methods: {
@@ -59,18 +67,18 @@
                 console.log(this.values);
             },
             startScroll(e){
-                this.index = 0;
                 this.firstScrollVal = e.touches[0].screenY; //初始位置
-                console.log(this.firstScrollVal);
+                console.info('start scroll', this.firstScrollVal);
                 e.preventDefault();
             },
             tryScroll(e){
-            let val = e.touches[0].screenY, element = $(e.currentTarget).find('ul');
-            this.scroll = val - this.firstScrollVal + this.getScroll(); //拖动距离
-            this.scrollTo(this.scroll);
-            e.preventDefault();
-            
-        },
+                let val = e.touches[0].screenY, element = $(e.currentTarget).find('ul');
+                console.log(this._scroll);
+                this.scroll = val - this.firstScrollVal + this.getScroll(); //拖动距离
+                this.scrollTo(this.scroll);
+                e.preventDefault();
+                
+            },
             getScroll(){
                 return this._scroll;
             },
@@ -114,10 +122,13 @@
             notify(){
                 var item = this.data[this.selectedIndex],
                     value = item && item[this.valueField];
+                if(value == this.value) return;
                 this.$emit('change', value);
+                this.$emit('sourcechange', this.depth);
             },
             selectItem(value){
                 if(!value) {
+                    this._scroll = this.scroll = 0;
                     return ;
                 }
                 this.selectedIndex = this.data.findIndex((item)=>item[this.valueField] == value);

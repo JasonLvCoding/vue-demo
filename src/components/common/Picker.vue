@@ -5,12 +5,8 @@
                 <li v-for="(item, index) in data" :class="{'selected':selectedIndex==index}">{{item[displayField]}}</li>
             </ul>
         </div>-->
-        <picker-item class="item" :data="data" v-model="valueObj[prop]" v-for="(prop,propIndex) in valueProps"></picker-item>
-        <div class="item" v-for="(val, childIndex) in values" v-if="childIndex < values.length-1" @touchstart="startScroll" @touchmove="tryScroll" @touchend="endScroll">
-            <ul>
-                <li v-for="item in getChild(val)">{{item[displayField]}}</li>
-            </ul>
-        </div>
+        <picker-item class="item" :data="source" :depth="index" v-model="values[index]" v-for="(source,index) in sources" @sourcechange="handleChange"></picker-item>
+       
         <div class="focus-frame"></div>
     </div>
 </template>
@@ -22,100 +18,73 @@ export default {
         pickerItem
     },
     name: 'picker',
+    props: {
+    	valueProps: {
+    		type: Array,
+    		default(){
+    			return [];
+    		}
+    	},
+    	value: {
+    		type: Object,
+    		default(){
+    			return {};
+    		}
+    	}
+    },
+    model: {
+        prop: 'value',
+        event: 'change'
+    },
     data(){
         return {
             data: cityData,
             displayField: 'text',
-            valueField: 'value',
+            valueField: 'valueCode',
             childField: 'children',
             split: '-',
             values: [],
-            depth: 2,
-            value: '',
+            sources: [],
+            depth: 3,
             display: false,
-            height: 30,
-            selectedIndex:0,
-            valueProps: ['province', 'city', 'dist'],
-            valueObj:{
-                province: '3',
-                city: '3',
-                dist: '3'
-            },
-            
+            height: 30       
         }
     },
     created(){
-        this.setValue(this.value, true);
+        this.setValue(this.value);
     },
     watch: {
-        'valueObj.province': function(val){
-            console.info('value changed', val);
+        values: function(val){
+        	var result = {};
+        	if(this.valueProps.length > 0){
+        		this.valueProps.forEach((prop, index)=>{
+        			result[prop] = val[index];
+        		});
+        	}else{
+        		result.value = val.join(this.split);
+        	}
+            this.$emit('change', result);
         }
     },
     methods:{
-        startScroll(e){
-            this.index = 0;
-            this.firstScrollVal = e.touches[0].screenY; //初始位置
-            console.log(this.firstScrollVal);
-            e.preventDefault();
-            
-        },
-        tryScroll(e){
-            let val = e.touches[0].screenY, element = $(e.currentTarget).find('ul');
-            this.scrollY = val - this.firstScrollVal + this.getScroll(element); //拖动距离
-            this.scrollTo(element, this.scrollY);
-            e.preventDefault();
-            
-        },
-        getScroll(element){
-            return element.data('top') || 0;
-        },
-        scrollTo(element, top){
-            element.css('transform', 'translateY(' + top + 'px)')
-
-        },
-        endScroll(e){
-            var element = $(e.currentTarget).find('ul'), 
-              startPos = this.getScroll(element),
-              offset = this.scrollY-startPos;
-            
-            if(Math.abs(offset) > this.height/2){
-                
-                this.scrollY = startPos + Math.ceil(offset/this.height)* this.height;
-            }else{
-                this.scrollY = startPos;
-            }
-            if(this.scrollY>0){
-                
-                this.scrollY=0;
-            }
-
-            if(this.scrollY < -element.height() + this.height ){
-                this.scrollY = -element.height()+ this.height;
-            }
-            console.log('start at', startPos);       
-            console.log('end at ', this.scrollY);
-
-            this.selectedIndex = Math.abs(this.scrollY/this.height);
-            this.setItem(this.data[this.selectedIndex])
-            this.scrollTo(element, this.scrollY);
-            element.data('top', this.scrollY)
-            this.scrollY = 0;
-        },
-
-
-
-        go(){
-
-        },
+    	handleChange(depth){
+    		var currentItem, source;
+    		while(depth < this.depth){
+    			source =  this.sources[depth];
+    			currentItem = source.find(item=>item[this.valueField]==this.values[depth]);
+    			if(currentItem == null){
+    				currentItem = this.getFirst(source);
+    				this.values[depth] = currentItem[this.valueField];
+    			}
+    			depth++;
+    			if(depth < this.depth){
+    				this.sources[depth] = this.getChild(currentItem);
+    			}
+    		}	
+    	},
         show(){
             this.setValue(this.value, true);
             this.display = true;
-        },
-        isArray(value){
-            return typeof value == 'object' 
-            && Object.prototype.toString.apply(value) == '[object Array]';
-
         },
         getChild(item){
             if(item == null) return [];
@@ -130,21 +99,26 @@ export default {
             if(!source || source.length == 0) return null;
             return source[0];
         },
-        setValue(value, autoFill){
+        setValue(value){
             var i = 0, values = value, source = this.data, currentItem;
             if(typeof value == 'String'){
                 values = value.split(this.split);
             }
             while(i < this.depth){
+            	if(!source) break;
+            	if(!this.sources[i] && i==0 || i > 0){
+            		this.sources[i] = source;
+            	}
+            	
                 currentItem = this.getItem(source, values[i]);
-                if(currentItem == null && autoFill){
+                if(currentItem == null){
                     currentItem = this.getFirst(source);
                 }
                 source = currentItem[this.childField];
-                this.values.push(currentItem);
-                console.log(currentItem);
+                this.values[i] = currentItem[this.valueField];
                 i++;
             }
+            console.log(this.values);
         }
     }
 }
