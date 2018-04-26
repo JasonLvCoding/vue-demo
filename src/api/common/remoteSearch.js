@@ -7,3 +7,11 @@ export function userSearch(name) {
     params: { name }
   })
 }
+
+export function getReportData(){
+	return fetch({
+		url: '/search/report',
+    	method: 'POST',
+    	params: {  }
+	})
+}

@@ -32,30 +32,7 @@
               </div>
               <button type="submit" class="btn btn-primary center-block" @click="submit">&nbsp;查询&nbsp;</button>
 
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>列头1</th>
-                      <th>列头2</th>
-                      <th>列头3</th>
-                      <th>列头4</th>
-                      <th>列头5</th>
-                      <th>列头6</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in menus">
-                      <td>{{item.path}}</td>
-                      <td>{{item.alias}}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.path}}</td>
-                      <td>{{item.path}}</td>
-                      <td>{{item.path}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <i-table ></i-table>
               <p><strong>详细信息</strong></p>
               <div class="form-inline  clearfix row">
                 <i-input  class="col-md-6" label="人员" name="user" rules="required|email" v-model="formState.user" >
@@ -112,9 +89,10 @@
 import iSelect from '@/components/common/fields/SelectField.vue'
 import iInput from '@/components/common/fields/InputField.vue'
 import picker from '@/components/common/Picker.vue'
+import iTable from '@/components/common/Table.vue'
 export default {
   name: 'casecreate',
-  components: { iSelect, iInput, picker },
+  components: { iSelect, iInput, picker, iTable },
   data () {
     return {
       formState:{
