@@ -61,6 +61,7 @@ export default {
   computed: {},
   mounted () { 
     this.initialize();
+    this.justify();
   },
   methods: {
     scrollHeader(e){
@@ -70,6 +71,10 @@ export default {
         console.info(scrollLeft,scrollTop);
       $('.ucredit-table :not(.ucredit-table-fixed) .ucredit-table-header').scrollLeft(scrollLeft);
       $('.ucredit-table .ucredit-table-fixed .ucredit-table-content').scrollTop(scrollTop);
+      this.justify(scrollTop);
+    },
+    justify(scrollTop){
+      $('.ucredit-table .ucredit-table-fixed .ucredit-table-content table').css('transform','translateY(-'+scrollTop+'px)');
     },
     initialize(){
       this.$store.dispatch('GetReportData').then((rp) => {
@@ -265,7 +270,7 @@ export default {
         }
         @media screen and (max-width:768px){
           .ucredit-table-fixed-l .ucredit-table-content{
-            overflow: auto;
+            overflow: hidden;
             max-height:100% !important;
           }
         }

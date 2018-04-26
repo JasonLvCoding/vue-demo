@@ -6,7 +6,6 @@
     :name="name"
     :id="name"
     debounce="1000"
-    :data-as="label"
     />
     <p class="form-control-static" v-if="static=='true'" v-text="currentValue"></p>
     <small class="text-danger" v-show="hasError">{{ errorMsg }}</small>
@@ -72,7 +71,11 @@ export default {
         return this._validator
       }else{
         const validator = new Validator()
-        validator.attach(this.name, this.rules, this.label)
+        validator.attach({
+          name: this.label,
+          rules: this.rules,
+          label: this.name
+        })
         this._validator = validator
         return validator
       }
@@ -89,9 +92,15 @@ export default {
     }
   },
   mounted(){
-    console.log(this.id);
     if(this.rules){
-      this.validator.attach(this.name, this.rules, this.label)
+      /* @params cope
+      * @param prettyName
+      * @param getter
+      * @param context
+      * @param listeners
+      */
+      
+      this.validator.attach(this.name, this.rules,{ prettyName:  this.label})
     }
 
   },

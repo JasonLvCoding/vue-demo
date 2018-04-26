@@ -1,17 +1,17 @@
 <template>
-    <div class="flex" v-show="display" >
-        <!--<div class="item" @touchstart="startScroll" @touchmove="tryScroll" @touchend="endScroll">
-            <ul id="test">
-                <li v-for="(item, index) in data" :class="{'selected':selectedIndex==index}">{{item[displayField]}}</li>
-            </ul>
-        </div>-->
-        <picker-item class="item" :data="source" :depth="index" v-model="values[index]" v-for="(source,index) in sources" @sourcechange="handleChange"></picker-item>
-       
-        <div class="focus-frame"></div>
+ <div class="modal-picker" v-show="display" >
+   
+    <div class="bottomFix">
+        <div class="top-fix"><span class="cancle"  @click.prevent="closeModal">取消</span><span class="btn-fix"  @click.prevent="confirm">确定</span></div>
+        <div class="flex"  >
+            <picker-item ref="pickerItem" class="item" :data="source" :depth="index" v-model="values[index]" v-for="(source,index) in sources" @sourcechange="handleChange"></picker-item>
+            <div class="focus-frame"></div>
+        </div>
+    </div>
     </div>
 </template>
 <script>
-import cityData from '@/utils/cityData.js'
+// import cityData from '@/utils/cityData.js'
 import pickerItem from '@/components/common/PickerItem.vue'
 export default {
     components:{
@@ -26,11 +26,15 @@ export default {
     		}
     	},
     	value: {
-    		type: Object,
+    		type: String,
     		default(){
-    			return {};
+    			return '';
     		}
-    	}
+    	},
+        depth: {
+            type: Number,
+            default:3
+        }
     },
     model: {
         prop: 'value',
@@ -38,35 +42,55 @@ export default {
     },
     data(){
         return {
-            data: cityData,
+            data: [],
             displayField: 'text',
             valueField: 'valueCode',
             childField: 'children',
             split: '-',
             values: [],
             sources: [],
-            depth: 3,
-            display: false,
-            height: 30       
+            height: 30,
+            display: false  
         }
     },
-    created(){
+    mounted(){
         this.setValue(this.value);
     },
     watch: {
+        value: function(value){
+            this.setValue(value);
+        },
         values: function(val){
-        	var result = {};
-        	if(this.valueProps.length > 0){
-        		this.valueProps.forEach((prop, index)=>{
-        			result[prop] = val[index];
-        		});
-        	}else{
-        		result.value = val.join(this.split);
-        	}
-            this.$emit('change', result);
+        	console.info('values changed', val);
         }
     },
     methods:{
+        showModal(){
+          this.display = true; 
+          console.log(this.$refs);
+          setTimeout(()=>{
+            this.$refs.pickerItem.forEach((pickerItem)=>{
+                pickerItem.init();
+            })
+          }, 0)
+          
+        },
+        closeModal(){
+           this.display = false;
+        },
+        confirm(){
+            var result;
+        	if(this.valueProps.length > 0){
+                result = {}
+        		this.valueProps.forEach((prop, index)=>{
+        			result[prop] = this.values[index];
+        		});
+        	}else{
+        		result = this.values.join(this.split);
+        	}
+            this.$emit('change', result);
+            this.closeModal();
+        },
     	handleChange(depth){
     		var currentItem, source;
     		while(depth < this.depth){
@@ -82,10 +106,6 @@ export default {
     			}
     		}	
     	},
-        show(){
-            this.setValue(this.value, true);
-            this.display = true;
-        },
         getChild(item){
             if(item == null) return [];
             return item[this.childField];
@@ -101,29 +121,41 @@ export default {
         },
         setValue(value){
             var i = 0, values = value, source = this.data, currentItem;
-            if(typeof value == 'String'){
+            console.log(typeof value);
+            if(typeof value == 'string'){
                 values = value.split(this.split);
             }
             while(i < this.depth){
             	if(!source) break;
             	if(!this.sources[i] && i==0 || i > 0){
             		this.sources[i] = source;
-            	}
-            	
+            	}	
                 currentItem = this.getItem(source, values[i]);
                 if(currentItem == null){
                     currentItem = this.getFirst(source);
                 }
-                source = currentItem[this.childField];
-                this.values[i] = currentItem[this.valueField];
+                //无数据情况
+                source = currentItem && currentItem[this.childField];
+                this.values[i] = currentItem　&&　currentItem[this.valueField];
                 i++;
             }
-            console.log(this.values);
+            
         }
     }
 }
 </script>
 <style>
+    .modal-picker{
+        z-index: 10000;
+        position: fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        background: rgba(0,0,0,0.7);
+        transition: opacity .15s linear;
+        opacity: 1;
+    }
     .flex {
         display: flex;
         justify-content: space-around;
@@ -132,14 +164,12 @@ export default {
         overflow: hidden;
         padding: 0;
     }
-
     .flex .item {
         flex: 1;
         height: auto;
         margin-top: 100px;
-        z-index: 1001
+        z-index: 10006;
     }
-
     .flex .item ul{ 
         margin-top: 0px;
     }
@@ -148,8 +178,9 @@ export default {
         line-height: 200%;
         color: #ccc;
         height: 30px;
+        text-overflow: ellipsis;
+        overflow: hidden
     }
-
     .focus-frame {
         position: absolute;
         top: 50%;
@@ -158,11 +189,37 @@ export default {
         border: 1px solid #ccc;
         border-width: 1px 0;
         height: 30px;
-        z-index: 1000;
+        z-index: 10005;
     }
     .flex .item ul li.selected {
         font-size:18px;
         color:#000;
+        
     }
-
+    .bottomFix {
+        padding:0 8px;
+        box-sizing:border-box;
+        bottom:0;
+        left:0;
+        right:0;
+        width:100%;
+        max-width: 750px;
+        height: 240px;
+        background-color:#fff;
+        position: absolute;
+    }
+    .top-fix {
+        overflow:hidden;
+    }
+    .top-fix span {
+        display:inline-block;
+        z-index: 10006;
+    }
+    .btn-fix {
+        
+        float:right;
+    }
+    .cancle {
+        float:left;
+    }
 </style>

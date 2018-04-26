@@ -35,10 +35,10 @@
               <i-table ></i-table>
               <p><strong>详细信息</strong></p>
               <div class="form-inline  clearfix row">
-                <i-input  class="col-md-6" label="人员" name="user" rules="required|email" v-model="formState.user" >
+                <i-input  class="col-md-6" label="人员" name="user" rules="required|min:2" v-model="formState.user" >
                   
                 </i-input>
-                <i-input  class="col-md-6" label="电话"  name="tel" rules="required"  type="number" v-model="formState.tel"  >
+                <i-input  class="col-md-6" label="电话"  name="tel" rules="required|mobile"  type="number" v-model="formState.tel"  >
                   
                 </i-input>
               </div>
@@ -77,7 +77,7 @@
         <button @click.prevent="showPicker">选择时间</button>
         <div>结果是:{{formState.values}}</div>
         <div style="height: 200px;">
-          <picker ref="picker" v-model="formState.values" :valueProps="formState.valueProps"></picker>
+          <date-picker ref="picker" v-model="formState.values" start="start" end="end"></date-picker>
         </div>
         
       </div>
@@ -88,11 +88,11 @@
 <script type="text/javascript">
 import iSelect from '@/components/common/fields/SelectField.vue'
 import iInput from '@/components/common/fields/InputField.vue'
-import picker from '@/components/common/Picker.vue'
+import datePicker from '@/components/common/DatePicker.vue'
 import iTable from '@/components/common/Table.vue'
 export default {
   name: 'casecreate',
-  components: { iSelect, iInput, picker, iTable },
+  components: { iSelect, iInput, datePicker, iTable },
   data () {
     return {
       formState:{
@@ -107,7 +107,7 @@ export default {
         project: '租赁',
         createDate: '2018-04-10',
         valueProps: ['province', 'city', 'dist'],
-        values: {}
+        values: ''
       }
     }
   },
@@ -117,18 +117,20 @@ export default {
     }
   },
   mounted(){
-    
+    this.formState.values = '2019-03-04'
   },
   methods: {
     submit(){
       console.info(this.$validator, this.formState.user);
-      this.$validator.validateAll().then(result=>{
+      this.$validator.validateAll({
+        ...this.formState
+      }).then(result=>{
         alert(result)
       });
     },
     showPicker(){
-      this.$refs.picker.show();
-    },
+      this.$refs.picker.showModal();
+    }
   }
 }
 </script>

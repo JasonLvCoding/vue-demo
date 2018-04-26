@@ -11,13 +11,15 @@ import VueI18N from 'vue-i18n'
 import VeeValidate from 'vee-validate'
 import messages from 'vee-validate/dist/locale/zh_CN'
 import './mock'
+import './utils/validate'
 
 Vue.use(Bus)
 Vue.use(VueI18N)
 Vue.use(VeeValidate, {
-  locale: 'cn',
+  locale: 'zh_CN',
+  delay: 1000,
   dictionary: {
-    cn: { messages }
+    zh_CN: { messages }
   }
 })
 
