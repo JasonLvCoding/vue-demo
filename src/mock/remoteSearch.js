@@ -29,7 +29,7 @@ const reportData = {
             "m_push_amt":12715.34
         },
         {
-         "category_name": "银领贷",      // 产品
+         "category_name": "测试1",      // 产品
          "d_amt_rate": "14.19%",           // 日金额占比
          "d_cnt_rate": "14.19%",            // 日件数占比
          "d_push_amt": 26378.76,         // 当日金额
@@ -41,7 +41,7 @@ const reportData = {
         },
         {
             "d_amt_rate":"87.16%",
-            "category_name":"英才贷",
+            "category_name":"测试2",
             "m_cnt_rate":"87.16%",
             "d_cnt_rate":"87.16%",
             "d_push_cnt":80,
@@ -52,7 +52,7 @@ const reportData = {
         },
         {
             "d_amt_rate":"40.54%",
-            "category_name":"秒贷",
+            "category_name":"测试3",
             "m_cnt_rate":"40.54%",
             "d_cnt_rate":"40.54%",
             "d_push_cnt":32,
